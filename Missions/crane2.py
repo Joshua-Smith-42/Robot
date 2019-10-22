@@ -10,6 +10,8 @@ color = ColorSensor(INPUT_4)
 gyro = GyroSensor(INPUT_1)
 tank_drive = MoveTank(OUTPUT_B, OUTPUT_C)
 motorD = MediumMotor(OUTPUT_D)
+Ldrive = LargeMotor(OUTPUT_B)
+Rdrive = LargeMotor(OUTPUT_C)
 
 wheelDiameter_mm = 56
 wheelCircumference_cm = (wheelDiameter_mm/10) * 3.14159265358979323846284338
@@ -31,5 +33,15 @@ def drive_cm(power, cm):
     cmToRotations(cm) = rt
     tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), int(rt) )
 
-def drive_till_line(power):
-    
+def square_on_line(power):
+    while colorL == color_black is false
+    Ldrive.on(SpeedPercent(power))
+
+    while colorR == color_black is false
+    Rdrive.on(SpeedPercent(power))
+
+
+# now the robot will start doing things
+
+square_on_line(60)
+#that will drive untill the line right before the crane

@@ -7,6 +7,7 @@ from ev3dev2.button import Button
 from ev3dev2.sound import Sound
 from ev3dev2.display import Display
 import time
+import sys
 btn = Button()
 color = ColorSensor(INPUT_4)
 tank_drive = MoveTank(OUTPUT_B, OUTPUT_C)  #This is the template whenever we code
@@ -93,11 +94,15 @@ def ColorChecking():
     elif color.color == color.COLOR_BLUE: #if blue
         crane()
 
+def failsafe():
+    sys.exit()
+
 #This is where the movement happens. the function "ColorChecking" is a function to decide what to do based on color.
 
 #not whenever we touch enter (or the mibble button) then it will call ColorChecking(). Not just when this line happens
 Sound_.play_tone(frequency=400, duration=0.5, volume=50)
 start = time.time()
+btn.on_backspace = failsafe
 
 while True: #this code essentially color checks for 30 seconds
     if (btn.down):

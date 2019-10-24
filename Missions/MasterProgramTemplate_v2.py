@@ -47,6 +47,7 @@ def crane():
     tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(20), 2.5)
     tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), inToRotations(3))
     tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(7), 1.5)
+    drive_cm(-15, 50)
 
 def design_and_build_one():
     #go forward

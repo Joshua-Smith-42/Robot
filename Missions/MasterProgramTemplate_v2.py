@@ -19,6 +19,9 @@ Sound_.play_tone(frequency=400, duration=0.5, volume=50) #plays a note so we kno
 
 #yellow = forwards
 def swing_and_safety():
+    tank_drive = MoveTank(OUTPUT_B, OUTPUT_C)
+    motorA = MediumMotor(OUTPUT_A)
+    motorD = MediumMotor(OUTPUT_D)
     tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #ROBOT MOVES FORWARD FROM BASE
     tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), .8) # ROBOT MOVES INTO SWING
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #ROBOT MOVES AWAY FROM SWING
@@ -32,14 +35,18 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.8)#ROBOT TURNS TO SAFETY FACTOR
     tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.13)#ROBOT MOVES INTO SAFETY FACTOR
     tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.2)#ROBOT TURNS TO KNOCK DOWN BEAMS
-    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.1) # ROBOT MOVES BACK INTO WALL
+    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.3) # ROBOT MOVES BACK TO NOT KNOCK DOWN THE BUILDING IN SAFETY FACTOR
     tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#ROBOT TURNS TO KNOCK DOWN BEAMS
-    tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 0.1) #ROBOT TURNS BACK TO BASE
     tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 12) # ROBOT MOVES BACK TO BASE
+
 
 #blue = turn *
 def crane():
-    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(0), 1)
+    tank_drive.on_for_rotations(SpeedPercent(35), SpeedPercent(35), inToRotations(27))
+    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), inToRotations(-5))
+    tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(20), 2.5)
+    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), inToRotations(3))
+    tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(7), 1.5)
 
 def design_and_build_one():
     #go forward
@@ -81,14 +88,15 @@ def drive_cm(power, cm):
 
 def big_design_and_build():
     drive_cm(50, 65)
-    drive_cm(-50, 65)
+    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(-50), 2)
+    drive_cm(-20, 65)
 
 #defining what "ColorChecking" is
 def ColorChecking():
     if color.color == color.COLOR_YELLOW: #if yellow
         swing_and_safety()
     elif color.color == color.COLOR_GREEN: #if green
-        green()
+        big_design_and_build()
     elif color.color == color.COLOR_RED: #if red
         design_and_build_one()
     elif color.color == color.COLOR_BLUE: #if blue

@@ -81,19 +81,19 @@ def big_design_and_build():
 
 def design_and_build_one():
     #go forward
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 360)
+    tank_drive.on_for_degrees(SpeedPercent(40), SpeedPercent(40), 360)
     #turn right
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), 545)
+    tank_drive.on_for_degrees(SpeedPercent(30), SpeedPercent(0), 545)
     #move forward
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 1322)
+    tank_drive.on_for_degrees(SpeedPercent(40), SpeedPercent(40), 1322)
     #turn left
-    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(50), 290)
+    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(20), 210)
+    tank_drive.on_for_degrees(SpeedPercent(40), SpeedPercent(40), 690)
     #go forward
-    tank_drive.on_for_degrees(SpeedPercent(-50), SpeedPercent(-50), 100)
-    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(-50), 330)
+    tank_drive.on_for_degrees(SpeedPercent(-40), SpeedPercent(-40), 720)
+    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(-20), 150)
     #go backward after leaving tan load, dropping off red load
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), -850)
-    #turn 
+    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), -2200)
     #tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), 839)
     #tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 600)
     #tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), 510)
@@ -109,8 +109,8 @@ def crane():
     # NEW BELOW HERE
     #tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(7), 1.5)
     drive_cm(-15, 50)
-    tank_drive.on_for_seconds(SpeedPercent(-5), SpeedPercent(-40), 1)
-    drive_cm(-40, 60)
+    tank_drive.on_for_seconds(SpeedPercent(-5), SpeedPercent(-50), 1)
+    drive_cm(-60, 60)
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #---------------------------------------- creating the function ColorChecking ---------------------------------------------------------------

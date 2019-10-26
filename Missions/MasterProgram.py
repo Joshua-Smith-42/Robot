@@ -109,8 +109,8 @@ def crane():
     # NEW BELOW HERE
     #tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(7), 1.5)
     drive_cm(-15, 50)
-    tank_drive.on_for_seconds(SpeedPercent(-5), SpeedPercent(-50), 1)
-    drive_cm(-60, 60)
+    tank_drive.on_for_seconds(SpeedPercent(-5), SpeedPercent(-56), 1)
+    drive_cm(-70, 65)
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #---------------------------------------- creating the function ColorChecking ---------------------------------------------------------------

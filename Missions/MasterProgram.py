@@ -17,6 +17,7 @@ color = ColorSensor(INPUT_4)
 tank_drive = MoveTank(OUTPUT_B, OUTPUT_C)  #This is the template whenever we code
 motorA = MediumMotor(OUTPUT_A)
 motorD = MediumMotor(OUTPUT_D)
+gyro = GyroSensor(INPUT_1)
 Sound_ = Sound()
 Display_ = Display()
 Sound_.play_tone(frequency=400, duration=0.5, volume=50) #plays a note so we know when the code starts
@@ -47,6 +48,17 @@ def drive_cm(power, cm):
     rt = cmToRotations(cm)
     tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), int(rt) )
 #---------------------------------------------------------------------------------------------------------------------------------------------
+
+def gyroTurn(deg, speedL, speedR):
+    startAng = gyro.angle
+    if deg >= 0:
+        while (gyro.angle-startAng) <= deg:
+            tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR))
+    if deg < 0:
+        while (gyro.angle-startAng) >= deg:
+            tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR))
+    tank_drive.off()
+
 
 #-----------------------------------yellow = swing and safety by Alan and Kunal---------------------------------------------------------------
 def swing_and_safety():
@@ -81,36 +93,44 @@ def big_design_and_build():
 
 def design_and_build_one():
     #go forward
-    tank_drive.on_for_degrees(SpeedPercent(40), SpeedPercent(40), 360)
+    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), cmToRotations(17)) # was 17.5929188601
     #turn right
-    tank_drive.on_for_degrees(SpeedPercent(30), SpeedPercent(0), 545)
+    gyroTurn(75, 50, 0)
     #move forward
-    tank_drive.on_for_degrees(SpeedPercent(40), SpeedPercent(40), 1322)
+    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), cmToRotations(64.60510759181166))
     #turn left
-    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(20), 210)
-    tank_drive.on_for_degrees(SpeedPercent(40), SpeedPercent(40), 690)
+    #tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(50), 253)
+    gyroTurn(-16, 0, 40) # was -15 was -14 orig -13
     #go forward
-    tank_drive.on_for_degrees(SpeedPercent(-40), SpeedPercent(-40), 720)
-    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(-20), 150)
+    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 700) # was 669
+    # turn slightly left to target red
+    #gyroTurn(3, 20, 10) # was #gyroTurn(-2,10,20)
     #go backward after leaving tan load, dropping off red load
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), -2200)
-    #tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), 839)
-    #tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 600)
-    #tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), 510)
+    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), -729)
+    #turn 
+    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), -350)
+    tank_drive.on_for_degrees(SpeedPercent(30), SpeedPercent(30), -800)
+    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 843)
+    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(50), 450)
+    tank_drive.on_for_degrees(25,25,75)
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #---------------------------------------- blue = crane by Ben and Joshua --------------------------------------------------------------------
 def crane():
-    tank_drive.on_for_rotations(SpeedPercent(35), SpeedPercent(35), inToRotations(27))
+    tank_drive.on_for_rotations(SpeedPercent(35), SpeedPercent(35), inToRotations(20))
+    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(10), inToRotations(7))
     tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), inToRotations(-5))
+    time.sleep(2.5)
     tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(22), 2.5) # turn toward second lever
-    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), inToRotations(3))
+    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(10), inToRotations(1.5))
     # NEW BELOW HERE
     #tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(7), 1.5)
     drive_cm(-15, 50)
     tank_drive.on_for_seconds(SpeedPercent(-5), SpeedPercent(-56), 1)
     drive_cm(-70, 65)
+    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(25), 0.75)
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #---------------------------------------- creating the function ColorChecking ---------------------------------------------------------------

@@ -62,6 +62,7 @@ def gyroTurn(deg, speedL, speedR):
 
 #-----------------------------------yellow = swing and safety by Alan and Kunal---------------------------------------------------------------
 def swing_and_safety():
+    motorD.on_for_degrees(SpeedPercent(15), -140)
     tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #ROBOT MOVES FORWARD FROM BASE
     tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), .8) # ROBOT MOVES INTO SWING
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #ROBOT MOVES AWAY FROM SWING

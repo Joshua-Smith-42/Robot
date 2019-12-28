@@ -58,11 +58,23 @@ def gyroTurn(deg, speedL, speedR):
         while (gyro.angle-startAng) >= deg:
             tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR))
     tank_drive.off()
+    #------------------------------------GyroStraight------------------------------------------------------------------------------------------------------#
+def gyroStraight(rotations):
+    startAng = gyro.angle
+    if deg >= 0:
+        while (gyro.angle-startAng) <= deg:
+            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(40),int(rotations) )
+    if deg < 0:
+        while (gyro.angle-startAng) <= deg:
+            tank_drive.on_for_rotations(SpeedPercent(40), SpeedPercent(30),int(rotations) )
+    tank_drive.off()
+
 
 
 #-----------------------------------yellow = swing and safety by Alan and Kunal---------------------------------------------------------------
 def swing_and_safety():
-    motorD.on_for_degrees(SpeedPercent(15), -140)
+    motorD.on_for_seconds(SpeedPercent(15), 3)
+    motorD.on_for_degrees(SpeedPercent(-15), 175)
     tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #ROBOT MOVES FORWARD FROM BASE
     tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), .8) # ROBOT MOVES INTO SWING
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #ROBOT MOVES AWAY FROM SWING
@@ -72,13 +84,14 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.8) #ROBOT MOVES FORWARD TO ELEVATOR
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(0), 1) #ROBOT TURNS CLOCKWISE TO FACE ELEVATOR
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #ROBOT MOVES FORWARD AND HITS ELEVATOR
-    motorA.on_for_degrees(SpeedPercent(15), 200)#MEDIUM MOTOR TURNS AWAY SO IT DOESN'T UNDO ELEVATOR
-    tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.8)#ROBOT TURNS TO SAFETY FACTOR
-    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.13)#ROBOT MOVES INTO SAFETY FACTOR
-    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.2)#ROBOT TURNS TO KNOCK DOWN BEAMS
+    motorA.on_for_degrees(SpeedPercent(15), 200) #MEDIUM MOTOR TURNS AWAY SO IT DOESN'T UNDO ELEVATOR
+    tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.8) #ROBOT TURNS TO SAFETY FACTOR
+    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.13) #ROBOT MOVES INTO SAFETY FACTOR
+    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.2) #ROBOT TURNS TO KNOCK DOWN BEAMS
     tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.3) # ROBOT MOVES BACK TO NOT KNOCK DOWN THE BUILDING IN SAFETY FACTOR
-    tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#ROBOT TURNS TO KNOCK DOWN BEAMS
+    tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5) #ROBOT TURNS TO KNOCK DOWN BEAMS
     tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 12) # ROBOT MOVES BACK TO BASE
+
 #------------------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------- Big Design and Build is green ----------------------------------------------------------

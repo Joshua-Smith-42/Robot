@@ -64,31 +64,18 @@ def squareOnLine(speed):
         tank_drive.on(speed, speed)
     tank_drive.off()
 
+def gyroStraight(speed, rotations):
+    # tachomotor.position gives encoder counts.
+    # use motor.counts_per_rot or something...
+    while 
+
 def elevatedPlaces():
     Sound_.play_tone(frequency=400, duration=0.5, volume=50) #plays a note so we know when the code starts
-    # drive_cm(65,121) # 65% speed -- fast whoosh
-    # gyroTurn(-90,-15,15)
-    # drive_cm(50,-20)
-    # drive_cm(25,15)
-    # gyroTurn(-25,-25,25)
-    # # gyroTurn(-112,-25,25) # turn left
-    # # drive_cm(50,48) # get away from misleading black
-    # squareOnLine(50)
-    # drive_cm(20,46) # drive up bridge
-    # tank_drive.off() # stall drivetrain
-    # while True:
-    #     if (btn.enter):
-    #         tank_drive.off(brake=False) # Unstall motors
-    #         break
-    #     time.sleep(0.25)
-    drive_cm(65,-126) # 65% speed -- fast whoosh
+    drive_cm(65,-127.5) # 65% speed -- fast whoosh (was -126)
     gyroTurn(-90,-15,15)
-    drive_cm(50,30) # square
-    drive_cm(25,-15)
-    gyroTurn(-19,-25,25) # was -17
-    # gyroTurn(-112,-25,25) # turn left
-    # drive_cm(50,48) # get away from misleading black
-    # squareOnLine(-50)
+    drive_cm(60,30) # square
+    drive_cm(30,-20) # go back (was -18)
+    gyroTurn(-20,-15,15) # was -19
     drive_cm(30,-119) # drive up bridge (was 20, -46) then (30, -90) them (30, -113)
     tank_drive.off() # stall drivetrain
     while True:

@@ -77,6 +77,6 @@ drive_cm(50,40)
 drive_cm(50,-21) #drops off wabbit
 gyroTurn(-39, 0 ,50)
 drive_cm(35,30) #drops crane
-drive_cm(50,-10)
+drive_cm(50,-51)
 gyroTurn(90, 50,0)
 drive_cm(50,-50)

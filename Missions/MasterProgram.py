@@ -47,6 +47,9 @@ def cmToMillimeters(cm): #hhm it works... questionable -- no syntax errors!
 def drive_cm(power, cm):
     rt = cmToRotations(cm)
     tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), int(rt) )
+def drive_cm_new(power, cm):
+    rt = cmToRotations(cm)
+    tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), rt)
 #---------------------------------------------------------------------------------------------------------------------------------------------
 
 def gyroTurn(deg, speedL, speedR):
@@ -73,9 +76,13 @@ def gyroStraight(rotations):
 
 #-----------------------------------yellow = swing and safety by Alan and Kunal---------------------------------------------------------------
 def swing_and_safety():
+    motorD.stop_action = motorD.STOP_ACTION_HOLD
+    motorD.stop() # stall right motor
     tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #ROBOT MOVES FORWARD FROM BASE
     tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), .8) # ROBOT MOVES INTO SWING
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #ROBOT MOVES AWAY FROM SWING
+    motorD.stop_action = motorD.STOP_ACTION_COAST
+    motorD.stop() # unstall right motor
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 1.5) #ROBOT TURNS TO SQUARE ON WALL
     motorA.on_for_degrees(SpeedPercent(15), 150) #LEFT ARM TURNS FOR ELEVATOR
     tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.45) # ROBOT MOVES BACK INTO WALL
@@ -83,6 +90,8 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(0), 1) #ROBOT TURNS CLOCKWISE TO FACE ELEVATOR
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #ROBOT MOVES FORWARD AND HITS ELEVATOR
     motorA.on_for_degrees(SpeedPercent(15), 200)#MEDIUM MOTOR TURNS AWAY SO IT DOESN'T UNDO ELEVATOR
+    motorA.stop_action = motorA.STOP_ACTION_COAST
+    motorA.stop() # unstall right motor
     tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.8)#ROBOT TURNS TO SAFETY FACTOR
     tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.13)#ROBOT MOVES INTO SAFETY FACTOR
     tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.2)#ROBOT TURNS TO KNOCK DOWN BEAMS
@@ -150,20 +159,31 @@ def design_and_build_one():
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
-#---------------------------------------- blue = crane by Ben and Joshua --------------------------------------------------------------------
+#----------------------------------------blue = crane & innovative architecture by Yash and Alan--------------------------------------------------------------------
 def crane():
-    tank_drive.on_for_rotations(SpeedPercent(35), SpeedPercent(35), inToRotations(20))
-    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(10), inToRotations(7))
-    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), inToRotations(-5))
-    time.sleep(2.5)
-    tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(22), 2.5) # turn toward second lever
-    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(10), inToRotations(1.5))
-    # NEW BELOW HERE
-    #tank_drive.on_for_seconds(SpeedPercent(10), SpeedPercent(7), 1.5)
-    drive_cm(-15, 50)
-    tank_drive.on_for_seconds(SpeedPercent(-5), SpeedPercent(-56), 1)
-    drive_cm(-70, 65)
-    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(25), 0.75)
+    drive_cm(50,50)
+    drive_cm(50,-21) #drops off wabbit
+    gyroTurn(-39, 0 ,50)
+    drive_cm(29,55) #drops crane
+    drive_cm(60,-51)
+    gyroTurn(90, 50,0)
+    drive_cm(70,-80)
+#--------------------------------------------------------------------------------------------------------------------------------------------
+
+#-------------------------------------------black = Elevated Places/Bridge - Ben & Joshua-------------------------------------------------------------
+def elevated_places():
+    drive_cm_new(65,-127.5) # 65% speed -- fast whoosh (was -126)
+    gyroTurn(-90,-15,15)
+    drive_cm_new(60,30) # square
+    drive_cm_new(30,-20) # go back (was -18)
+    gyroTurn(-20,-15,15) # was -19
+    drive_cm_new(30,-119) # drive up bridge (was 20, -46) then (30, -90) them (30, -113)
+    tank_drive.off() # stall drivetrain
+    while True:
+        if (btn.enter):
+            tank_drive.off(brake=False) # Unstall motors
+            break
+        time.sleep(0.25)
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #---------------------------------------- creating the function ColorChecking ---------------------------------------------------------------
@@ -176,6 +196,8 @@ def ColorChecking():
         design_and_build_one()
     elif color.color == color.COLOR_BLUE: #if blue
         crane()
+    elif color.color == color.COLOR_BLACK: # if black
+        elevated_places()
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #This is where the movement happens. the function "ColorChecking" is a function to decide what to do based on color.

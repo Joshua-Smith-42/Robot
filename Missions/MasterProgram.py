@@ -161,13 +161,13 @@ def design_and_build_one():
 
 #----------------------------------------blue = crane & innovative architecture by Yash and Alan--------------------------------------------------------------------
 def crane():
-    drive_cm(50,50)
-    drive_cm(50,-21) #drops off wabbit
+    drive_cm_new(50,42)
+    drive_cm_new(50,-23) #drops off wabbit
     gyroTurn(-39, 0 ,50)
-    drive_cm(29,55) #drops crane
-    drive_cm(60,-51)
+    drive_cm_new(35,30) #drops crane
+    drive_cm_new(50,-51)
     gyroTurn(90, 50,0)
-    drive_cm(70,-80)
+    drive_cm_new(70,-60)
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------black = Elevated Places/Bridge - Ben & Joshua-------------------------------------------------------------

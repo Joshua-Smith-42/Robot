@@ -116,49 +116,14 @@ def big_design_and_build():
 #------------------------------------------------------------ red = Design & Build 1 --------------------------------------------------------
 
 def design_and_build_one():
-    # #go forward
-    # tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), cmToRotations(17)) # was 17.5929188601
-    # #turn right
-    # gyroTurn(75, 50, 0)
-    # #move forward
-    # tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), cmToRotations(64.60510759181166))
-    # #turn left
-    # #tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(50), 253)
-    # gyroTurn(-16, 0, 40) # was -15 was -14 orig -13
-    # #go forward
-    # tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 700) # was 669
-    # # turn slightly left to target red
-    # #gyroTurn(3, 20, 10) # was #gyroTurn(-2,10,20)
-    # #go backward after leaving tan load, dropping off red load
-    # tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), -729)
-    # #turn 
-    # tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), -350)
-    # tank_drive.on_for_degrees(SpeedPercent(30), SpeedPercent(30), -800)
-    # tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 843)
-    # tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(50), 450)
-    # tank_drive.on_for_degrees(25,25,75)
-
-    #go forward
-    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), cmToRotations(16)) # was 17.5929188601
-    #turn right
-    gyroTurn(80, 27, -27)
-    #move forward
-    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), cmToRotations(64.60510759181166))
-    #turn left
-    #tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(50), 253)
-    gyroTurn(-15, -40, 40) # was -15 was -14 orig -13
-    #go forward
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 850) # was 669
-    # turn slightly left to target red
-    #gyroTurn(3, 20, 10) # was #gyroTurn(-2,10,20)
-    #go backward after leaving tan load, dropping off red load
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), -729)
-    #turn 
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(0), -350)
-    tank_drive.on_for_degrees(SpeedPercent(30), SpeedPercent(30), -800)
-    tank_drive.on_for_degrees(SpeedPercent(50), SpeedPercent(50), 843)
-    tank_drive.on_for_degrees(SpeedPercent(0), SpeedPercent(50), 450)
-    tank_drive.on_for_degrees(25,25,75)
+    drive_cm_new(50,45) # forward
+    gyroTurn(-26,0,50) # turn toward tan
+    drive_cm_new(50,75) # wheeeeee
+    drive_cm_new(50,-46) # drop tan
+    motorD.on_for_degrees(25,80) # opens gate
+    drive_cm_new(50, -10) # go back (was -5) 
+    gyroTurn(35,50,0) # turn
+    drive_cm_new(70,-110) # back to home sweet homes
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------

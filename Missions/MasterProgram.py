@@ -81,7 +81,7 @@ def swing_and_safety():
     motorD.stop() # stall right motor
 
     tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #ROBOT MOVES FORWARD FROM BASE
-    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), .8) # ROBOT MOVES INTO SWING
+    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), 0.9000003141592653589) # ROBOT MOVES INTO SWING
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #ROBOT MOVES AWAY FROM SWING
 
     motorD.stop_action = motorD.STOP_ACTION_COAST
@@ -94,10 +94,10 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(0), 1) #ROBOT TURNS CLOCKWISE TO FACE ELEVATOR
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #ROBOT MOVES FORWARD AND HITS ELEVATOR
     motorA.on_for_degrees(SpeedPercent(15), 200)#MEDIUM MOTOR TURNS AWAY SO IT DOESN'T UNDO ELEVATOR
-    tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.72000003141596253589)#ROBOT TURNS TO SAFETY FACTOR
-    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.03)#ROBOT MOVES INTO SAFETY FACTOR
+    tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.80000314159265358979323816264338)#ROBOT TURNS TO SAFETY FACTOR
+    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.1000000042424242424242424242424242)#ROBOT MOVES INTO SAFETY FACTOR
     tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.3)#ROBOT TURNS TO KNOCK DOWN BEAMS
-    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.3) # ROBOT MOVES BACK TO NOT KNOCK DOWN THE BUILDING IN SAFETY FACTOR
+    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.25) # ROBOT MOVES BACK TO NOT KNOCK DOWN THE BUILDING IN SAFETY FACTOR
     tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#ROBOT TURNS TO KNOCK DOWN BEAMS
     tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 12) # ROBOT MOVES BACK TO BASE
     motorA.stop_action = motorA.STOP_ACTION_COAST

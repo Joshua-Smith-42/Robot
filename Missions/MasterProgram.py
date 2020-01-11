@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#^this is what tells the robot that it should run this it is called a
+#^^^^this is what tells the robot that it should run this|it is called a shebang line
 
 # FLL 42, Pythonian Rabbotics's master program.
 

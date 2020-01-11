@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+#^this is what tells the robot that it should run this it is called a
 
-# FLL 42, Pythonian Rabbotics's master program. Copyright (c) 2019 FLL team 42
+# FLL 42, Pythonian Rabbotics's master program.
 
 #---------------------------------------------------Imports and variable definitions-----------------------------------------------------------------
-from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, SpeedPercent, MoveTank, MediumMotor
+from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, SpeedPercent, MoveTank, MediumMotor#gives us accses to everything we need to run EV3 dev
 from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3, INPUT_4
 from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.sensor.lego import GyroSensor
@@ -62,7 +63,7 @@ def gyroTurn(deg, speedL, speedR):
             tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR)) # turn
     tank_drive.off() # stop turning at the end
 #------------------------------------GyroStraight------------------------------------------------------------------------------------------------------#
-def gyroStraight(rotations):
+def gyroStraight(rotations):#WARNING THIS DOENT WORK DO NOT PUT IT IN ROBOT NOTEBOOK
     startAng = gyro.angle
     if deg >= 0:
         while (gyro.angle-startAng) <= deg:
@@ -78,69 +79,69 @@ def gyroStraight(rotations):
 def swing_and_safety():
 
     motorD.stop_action = motorD.STOP_ACTION_HOLD
-    motorD.stop() # stall right motor
+    motorD.stop() # stall right motor so that it isn't pushed by the swing instead of pushing the swing
 
-    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #ROBOT MOVES FORWARD FROM BASE
-    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), 0.9000003141592653589) # ROBOT MOVES INTO SWING
-    tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #ROBOT MOVES AWAY FROM SWING
+    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #moves foward past base
+    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), 0.9000003141592653589) #drives into swing
+    tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #backs away from swing
 
     motorD.stop_action = motorD.STOP_ACTION_COAST
-    motorD.stop() # unstall right motor
+    motorD.stop() # unstall right motor so it can move when we need it to
 
-    tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 1.5) #ROBOT TURNS TO SQUARE ON WALL
-    motorA.on_for_degrees(SpeedPercent(15), 150) #LEFT ARM TURNS FOR ELEVATOR
-    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.666666666666666666) # ROBOT MOVES BACK INTO WALL
-    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.8) #ROBOT MOVES FORWARD TO ELEVATOR
-    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(0), 1) #ROBOT TURNS CLOCKWISE TO FACE ELEVATOR
-    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #ROBOT MOVES FORWARD AND HITS ELEVATOR
-    motorA.on_for_degrees(SpeedPercent(15), 200)#MEDIUM MOTOR TURNS AWAY SO IT DOESN'T UNDO ELEVATOR
-    tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.80000314159265358979323816264338)#ROBOT TURNS TO SAFETY FACTOR
-    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.1000000042424242424242424242424242)#ROBOT MOVES INTO SAFETY FACTOR
-    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.3)#ROBOT TURNS TO KNOCK DOWN BEAMS
-    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.25) # ROBOT MOVES BACK TO NOT KNOCK DOWN THE BUILDING IN SAFETY FACTOR
-    tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#ROBOT TURNS TO KNOCK DOWN BEAMS
-    tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 12) # ROBOT MOVES BACK TO BASE
+    tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 1.5) #turns to square on wall
+    motorA.on_for_degrees(SpeedPercent(15), 150) #left arm turns out from behind the robot so that it is in position to score Elevator
+    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.666666666666666666) # squares on the wall 
+    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.8) #drives up to the elevator
+    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(0), 1) #turns right to face the elevator
+    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #drives into elevator and flips it
+    motorA.on_for_degrees(SpeedPercent(15), 200)#motor turns away to not unscore elevator
+    tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.80000314159265358979323816264338)#robot turns toward saftey factor
+    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.1000000042424242424242424242424242)#drives up to safty factor|sticking beam under safty factor
+    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.3)#turns right to knok the middle two beams
+    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.25) # drives backwards
+    tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#turns left to knock down the closest left beam
+    tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 12) #drives back to home sweet home
     motorA.stop_action = motorA.STOP_ACTION_COAST
-    motorA.stop() # unstall left motor
+    motorA.stop() # unstall left motor so that we can put the next atachment on without to much difficulty
 #------------------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------- Big Design and Build is green ----------------------------------------------------------
 
 def big_design_and_build():
-    drive_cm(50, 65) # go forward to drop off stuff
-    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(-50), 2) # turn right
+    drive_cm(50, 65) # goes forward to drop off a big hunk of designand build blocks
+    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(-50), 2) # turns right to angle back towards home as it backs away from the design and build
     drive_cm(-20, 65) # back into home sweet home
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------------------ red = Design & Build 1 --------------------------------------------------------
 
-def design_and_build_one():
-    drive_cm_new(50,45) # forward
-    gyroTurn(-26,0,50) # turn toward tan
-    drive_cm_new(50,75) # wheeeeee
-    drive_cm_new(50,-46) # drop tan
-    motorD.on_for_degrees(25,80) # opens gate
-    drive_cm_new(50, -10) # go back
-    gyroTurn(35,50,0) # turn
-    drive_cm_new(70,-110) # back to home sweet homes
+def design_and_build_one(): #small design and build
+    drive_cm_new(50,45) #drives forward out just past the red circle
+    gyroTurn(-26,0,50) # turns toward tan
+    drive_cm_new(50,75) #drives up to tan wheeeeee
+    drive_cm_new(50,-46) # drops off tan block by driving backwards|goes all the way to the red circle
+    motorD.on_for_degrees(25,80) # opens gate holding red block
+    drive_cm_new(50, -10) # goes back in order to drop off the red block
+    gyroTurn(35,50,0) # turns to angle towards home
+    drive_cm_new(70,-110) # back to home sweet home
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #----------------------------------------blue = crane & innovative architecture by Yash and Alan--------------------------------------------------------------------
 def crane():
-    drive_cm_new(50,42) # drive forward
-    drive_cm_new(50,-23) # drive back (drops off wabbit)
-    gyroTurn(-39, 0, 50) # turn toward crane
+    drive_cm_new(50,42) # drives forward out to build sight
+    drive_cm_new(50,-23) # drives back (drops off wabbit)
+    gyroTurn(-39, 0, 50) # turns toward crane
     drive_cm_new(35,30) #drops crane
-    drive_cm_new(50,-51) # drive back so we don't run into big D&B
+    drive_cm_new(50,-51) # drives back so we don't run into big D&B
     gyroTurn(90, 50, 0) # turn right
     drive_cm_new(70,-60) # drive back into home sweet home
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------black = Elevated Places/Bridge - Ben & Joshua-------------------------------------------------------------
-def elevated_places():
+def elevated_places():# the bridge mission
     drive_cm_new(65,-127.5) #drive out(backwards so that it can fit up the bridge better) and stop just before the swing | 65% speed -- fast whoosh
     gyroTurn(-90,-15,15)#turns so that the front of the robot faces the wall
     drive_cm_new(60,30) #drives forwards and square on the front of the robot (back of the robot facing bridge)
@@ -149,24 +150,26 @@ def elevated_places():
     drive_cm_new(30,-119) # drives backwards up bridge
     tank_drive.off() # stalls drivetrain
     while True:
-        if (btn.enter):
-            tank_drive.off(brake=False) # Unstalls motors
+        if (btn.enter): #if the down button is pressed
+            tank_drive.off(brake=False) # Unstall motors
             break
         time.sleep(0.25)
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #---------------------------------------- creating the function ColorChecking ---------------------------------------------------------------
 def ColorChecking():
-    if color.color == color.COLOR_YELLOW: #if yellow
-        swing_and_safety()
-    elif color.color == color.COLOR_GREEN: #if green
-        big_design_and_build()
-    elif color.color == color.COLOR_RED: #if red
-        design_and_build_one()
-    elif color.color == color.COLOR_BLUE: #if blue
-        crane()
-    elif color.color == color.COLOR_BLACK: # if black
-        elevated_places()
+    if color.color == color.COLOR_YELLOW: #if yellow is seen
+        swing_and_safety()#do swing and safty mission
+    elif color.color == color.COLOR_GREEN: #if green is seen
+        big_design_and_build()#do the big design and buil mission
+    elif color.color == color.COLOR_RED: #if red is seen
+        design_and_build_one()# do the small design and build mission
+    elif color.color == color.COLOR_BLUE: #if blue is seen
+        crane()#do the crane mission
+    elif color.color == color.COLOR_BLACK: # if black is seen
+        elevated_places()#do the bridge mission
+
+#code for all the missions mentioned are up
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #This is where the movement happens. the function "ColorChecking" is a function to decide what to do based on color.
@@ -176,17 +179,17 @@ def failsafe():
     sys.exit()
 #--------------------------------------
 
-#now whenever we touch enter (or the middle button) then it will call ColorChecking().
-Sound_.play_tone(frequency=400, duration=0.5, volume=50)
-start = time.time()
+#this is when the code accually starts
+Sound_.play_tone(frequency=400, duration=0.5, volume=50)#there is a 15-20 second lag when we start a program so this tells us that master has alreafy started by beeping
+start = time.time() #this makes it so that when we call start it is equal to what ever far the robot is in the code (IE: 00:12 if it was 12 seconds in)
 btn.on_backspace = failsafe
 
-while True: #this code essentially color checks forever
-    if (btn.down):
+while True: #the code that is indented repetes forever untill we stop the program
+    if (btn.down): 
         break
     pass
-    btn.wait_for_released('enter')
-    ColorChecking()
+    btn.wait_for_released('enter')#waits untill the enter(middle) button is pressed
+    ColorChecking() #calls the function color checking see above
 
 # Beepity beep!
 Sound_.play_tone(frequency=400, duration=0.5, volume=50)

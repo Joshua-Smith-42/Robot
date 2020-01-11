@@ -43,12 +43,13 @@ def cmToRotations(cm):
 def inToMillimeters(inches):
     return inches * 25.4
 # centimeters to millimeters:
-def cmToMillimeters(cm): #hhm it works... questionable -- no syntax errors!
-    return cm * 10 # Yay, no syntax errors!
-def drive_cm(power, cm):
+def cmToMillimeters(cm):
+    return cm * 10 
+def drive_cm(power, cm):#when you call this you tell it how many centimeters to dive and it drives that far how ever we discovered
+    #that it didn't work right
     rt = cmToRotations(cm)
     tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), int(rt) )
-def drive_cm_new(power, cm):
+def drive_cm_new(power, cm):#so instead of changing that one (and then all our code) we made this one so now we can use this more correct version
     rt = cmToRotations(cm)
     tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), rt)
 #---------------------------------------------------------------------------------------------------------------------------------------------

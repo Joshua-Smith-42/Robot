@@ -12,14 +12,14 @@ from ev3dev2.sound import Sound
 from ev3dev2.display import Display
 import time
 import sys
-btn = Button()
-color = ColorSensor(INPUT_4)
-tank_drive = MoveTank(OUTPUT_B, OUTPUT_C)  #This is the template whenever we code
-motorA = MediumMotor(OUTPUT_A)
-motorD = MediumMotor(OUTPUT_D)
-gyro = GyroSensor(INPUT_1)
-Sound_ = Sound()
-Display_ = Display()
+btn = Button() # variable so we can get buttons pressed on EV3
+color = ColorSensor(INPUT_4) # color sensor for checking attachment color
+tank_drive = MoveTank(OUTPUT_B, OUTPUT_C)  # Creates a variable so we can control the drivetrain
+motorA = MediumMotor(OUTPUT_A) # left medium motor
+motorD = MediumMotor(OUTPUT_D) # right medium motor
+gyro = GyroSensor(INPUT_1) # gyro variable
+Sound_ = Sound() # beepity beep
+Display_ = Display() # for displaying text
 Sound_.play_tone(frequency=400, duration=0.5, volume=50) #plays a note so we know when the code starts
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -53,23 +53,23 @@ def drive_cm_new(power, cm):
 #---------------------------------------------------------------------------------------------------------------------------------------------
 
 def gyroTurn(deg, speedL, speedR):
-    startAng = gyro.angle
-    if deg >= 0:
-        while (gyro.angle-startAng) <= deg:
-            tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR))
-    if deg < 0:
-        while (gyro.angle-startAng) >= deg:
-            tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR))
-    tank_drive.off()
-    #------------------------------------GyroStraight------------------------------------------------------------------------------------------------------#
+    startAng = gyro.angle # get current gyro angle
+    if deg >= 0: # if we're turning right,
+        while (gyro.angle-startAng) <= deg: # while the current turned angle is less than the angle we want to turn to,
+            tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR)) # turn
+    if deg < 0: # if we're turning left, 
+        while (gyro.angle-startAng) >= deg: # while the current turned angle is greater than the angle we want to turn to,
+            tank_drive.on(SpeedPercent(speedL), SpeedPercent(speedR)) # turn
+    tank_drive.off() # stop turning at the end
+#------------------------------------GyroStraight------------------------------------------------------------------------------------------------------#
 def gyroStraight(rotations):
     startAng = gyro.angle
     if deg >= 0:
         while (gyro.angle-startAng) <= deg:
-            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(40),int(rotations) )
+            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(40), rotations)
     if deg < 0:
         while (gyro.angle-startAng) <= deg:
-            tank_drive.on_for_rotations(SpeedPercent(40), SpeedPercent(30),int(rotations) )
+            tank_drive.on_for_rotations(SpeedPercent(40), SpeedPercent(30), rotations)
     tank_drive.off()
 
 
@@ -107,9 +107,9 @@ def swing_and_safety():
 #------------------------------------------------- Big Design and Build is green ----------------------------------------------------------
 
 def big_design_and_build():
-    drive_cm(50, 65)
-    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(-50), 2)
-    drive_cm(-20, 65)
+    drive_cm(50, 65) # go forward to drop off stuff
+    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(-50), 2) # turn right
+    drive_cm(-20, 65) # back into home sweet home
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -121,7 +121,7 @@ def design_and_build_one():
     drive_cm_new(50,75) # wheeeeee
     drive_cm_new(50,-46) # drop tan
     motorD.on_for_degrees(25,80) # opens gate
-    drive_cm_new(50, -10) # go back (was -5) 
+    drive_cm_new(50, -10) # go back
     gyroTurn(35,50,0) # turn
     drive_cm_new(70,-110) # back to home sweet homes
 
@@ -130,27 +130,27 @@ def design_and_build_one():
 
 #----------------------------------------blue = crane & innovative architecture by Yash and Alan--------------------------------------------------------------------
 def crane():
-    drive_cm_new(50,42)
-    drive_cm_new(50,-23) #drops off wabbit
-    gyroTurn(-39, 0 ,50)
+    drive_cm_new(50,42) # drive forward
+    drive_cm_new(50,-23) # drive back (drops off wabbit)
+    gyroTurn(-39, 0, 50) # turn toward crane
     drive_cm_new(35,30) #drops crane
-    drive_cm_new(50,-51)
-    gyroTurn(90, 50,0)
-    drive_cm_new(70,-60)
+    drive_cm_new(50,-51) # drive back so we don't run into big D&B
+    gyroTurn(90, 50, 0) # turn right
+    drive_cm_new(70,-60) # drive back into home sweet home
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------black = Elevated Places/Bridge - Ben & Joshua-------------------------------------------------------------
 def elevated_places():
-    drive_cm_new(65,-127.5) # 65% speed -- fast whoosh (was -126)
-    gyroTurn(-90,-15,15)
-    drive_cm_new(60,30) # square
-    drive_cm_new(30,-20) # go back (was -18)
-    gyroTurn(-20,-15,15) # was -19
-    drive_cm_new(30,-119) # drive up bridge (was 20, -46) then (30, -90) them (30, -113)
-    tank_drive.off() # stall drivetrain
+    drive_cm_new(65,-127.5) #drive out(backwards so that it can fit up the bridge better) and stop just before the swing | 65% speed -- fast whoosh
+    gyroTurn(-90,-15,15)#turns so that the front of the robot faces the wall
+    drive_cm_new(60,30) #drives forwards and square on the front of the robot (back of the robot facing bridge)
+    drive_cm_new(30,-20) #drives backwards to get in a better postion to drive up the bridge
+    gyroTurn(-20,-15,15) # final positioning turn 
+    drive_cm_new(30,-119) # drives backwards up bridge
+    tank_drive.off() # stalls drivetrain
     while True:
         if (btn.enter):
-            tank_drive.off(brake=False) # Unstall motors
+            tank_drive.off(brake=False) # Unstalls motors
             break
         time.sleep(0.25)
 #--------------------------------------------------------------------------------------------------------------------------------------------

@@ -45,13 +45,13 @@ def inToMillimeters(inches):
 # centimeters to millimeters:
 def cmToMillimeters(cm):
     return cm * 10 
-def drive_cm(power, cm):#when you call this you tell it how many centimeters to dive and it drives that far how ever we discovered
+def drive_cm(power, cm, brake=False):#when you call this you tell it how many centimeters to dive and it drives that far how ever we discovered
     #that it didn't work right
     rt = cmToRotations(cm)
-    tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), int(rt) )
-def drive_cm_new(power, cm):#so instead of changing that one (and then all our code) we made this one so now we can use this more correct version
+    tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), int(rt), brake=brake)
+def drive_cm_new(power, cm, brake=False):#so instead of changing that one (and then all our code) we made this one so now we can use this more correct version
     rt = cmToRotations(cm)
-    tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), rt)
+    tank_drive.on_for_rotations(SpeedPercent(power), SpeedPercent(power), rt, brake=brake)
 #---------------------------------------------------------------------------------------------------------------------------------------------
 
 def gyroTurn(deg, speedL, speedR):
@@ -97,11 +97,12 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #drives into elevator and flips it
     motorA.on_for_degrees(SpeedPercent(15), 200)#motor turns away to not unscore elevator
     tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.80000314159265358979323816264338)#robot turns toward saftey factor
-    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.1000000042424242424242424242424242)#drives up to safty factor|sticking beam under safty factor
-    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.3)#turns right to knok the middle two beams
+    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.120000042424242424242424242424242)#drives up to safty factor|sticking beam under safty factor
+    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.2)#turns right to knok the middle two beams
     tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.25) # drives backwards
     tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#turns left to knock down the closest left beam
-    tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 12) #drives back to home sweet home
+    tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 7) #drives back to home sweet home
+    tank_drive.on_for_rotations(SpeedPercent(-50), SpeedPercent(-60), 5) #drives back to home sweet home
     motorA.stop_action = motorA.STOP_ACTION_COAST
     motorA.stop() # unstall left motor so that we can put the next atachment on without to much difficulty
 #------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,7 +152,7 @@ def elevated_places():# the bridge mission
     drive_cm_new(30,-119) # drives backwards up bridge
     tank_drive.off() # stalls drivetrain
     while True:
-        if (btn.enter): #if the down button is pressed
+        if (btn.enter): #if the middle button is pressed
             tank_drive.off(brake=False) # Unstall motors
             break
         time.sleep(0.25)

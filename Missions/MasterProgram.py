@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#^^^^this is what tells the robot that it should run this|it is called a shebang line
+#^^^^This line is required to tell the EV3 to run this file using Python|it is called a shebang line|it MUST be on the first line
 
 # FLL 42, Pythonian Rabbotics's master program.
 
@@ -187,8 +187,8 @@ start = time.time() #this makes it so that when we call start it is equal to wha
 btn.on_backspace = failsafe
 
 while True: #the code that is indented repetes forever untill we stop the program
-    if (btn.down): 
-        break
+    if (btn.down):#if the down button is pressed: 
+        break#leave the loop
     pass
     btn.wait_for_released('enter')#waits untill the enter(middle) button is pressed
     ColorChecking() #calls the function color checking see above

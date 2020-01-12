@@ -83,28 +83,36 @@ def swing_and_safety():
     motorD.stop() # stall right motor so that it isn't pushed by the swing instead of pushing the swing
 
     tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #moves foward past base
-    tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), 0.9000003141592653589) #drives into swing
-    tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #backs away from swing
+    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 0.9500003141592653589) #drives into swing
+    tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.45) #backs away from swing
 
     motorD.stop_action = motorD.STOP_ACTION_COAST
     motorD.stop() # unstall right motor so it can move when we need it to
 
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 1.5) #turns to square on wall
     motorA.on_for_degrees(SpeedPercent(15), 150) #left arm turns out from behind the robot so that it is in position to score Elevator
-    tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.666666666666666666) # squares on the wall 
-    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.8) #drives up to the elevator
+    tank_drive.on_for_rotations(SpeedPercent(-25), SpeedPercent(-25), 0.58) # squares on the wall 
+    tank_drive.on_for_rotations(SpeedPercent(45), SpeedPercent(45), 1.8) #drives up to the elevator
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(0), 1) #turns right to face the elevator
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #drives into elevator and flips it
     motorA.on_for_degrees(SpeedPercent(15), 200)#motor turns away to not unscore elevator
-    tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.80000314159265358979323816264338)#robot turns toward saftey factor
-    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.120000042424242424242424242424242)#drives up to safty factor|sticking beam under safty factor
-    tank_drive.on_for_rotations(SpeedPercent(10), SpeedPercent(-10), 0.2)#turns right to knok the middle two beams
+    drive_cm_new(20, -7) # back up so we get a better angle for safety factor
+    gyroTurn(36, 30, -30) # turn toward safety factor
+    motorD.on_for_degrees(SpeedPercent(30), 150) # move right attachment out of the way of safety factor
+    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 0.5) # move halfway to safety factor
+    motorA.on_for_degrees(SpeedPercent(30), -350) # move left attachment out of the way of safety factor
+    #was 1 instruction of 1.074242...
+    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 0.5742424242424242424242424242)#drives up to safety factor|sticking beam under safty factor
+    tank_drive.on_for_rotations(SpeedPercent(12), SpeedPercent(-10), 0.2)#turns right to knock the middle two beams
     tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.25) # drives backwards
     tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#turns left to knock down the closest left beam
-    tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-60), 7) #drives back to home sweet home
+    tank_drive.on_for_rotations(SpeedPercent(-60), SpeedPercent(-65), 7) #drives back to home sweet home
     tank_drive.on_for_rotations(SpeedPercent(-50), SpeedPercent(-60), 5) #drives back to home sweet home
     motorA.stop_action = motorA.STOP_ACTION_COAST
     motorA.stop() # unstall left motor so that we can put the next atachment on without to much difficulty
+
+    motorD.stop_action = motorD.STOP_ACTION_COAST
+    motorD.stop() # unstall right motor so that we can put the next atachment on without to much difficulty
 #------------------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------- Big Design and Build is green ----------------------------------------------------------
@@ -120,11 +128,11 @@ def big_design_and_build():
 
 def design_and_build_one(): #small design and build
     drive_cm_new(50,45) #drives forward out just past the red circle
-    gyroTurn(-26,0,50) # turns toward tan
-    drive_cm_new(50,75) #drives up to tan wheeeeee
-    drive_cm_new(50,-46) # drops off tan block by driving backwards|goes all the way to the red circle
+    gyroTurn(-27,0,50) # turns toward tan
+    drive_cm_new(50,68) #drives up to tan wheeeeee
+    drive_cm_new(50,-42) # drops off tan block by driving backwards|goes all the way to the red circle
     motorD.on_for_degrees(25,80) # opens gate holding red block
-    drive_cm_new(50, -10) # goes back in order to drop off the red block
+    drive_cm_new(50, -15) # goes back in order to drop off the red block
     gyroTurn(35,50,0) # turns to angle towards home
     drive_cm_new(70,-110) # back to home sweet home
 

@@ -141,9 +141,9 @@ def design_and_build_one(): #small design and build
 
 #----------------------------------------blue = crane & innovative architecture by Yash and Alan--------------------------------------------------------------------
 def crane():
-    drive_cm_new(50,42) # drives forward out to build sight
-    drive_cm_new(50,-23) # drives back (drops off wabbit)
-    gyroTurn(-39, 0, 50) # turns toward crane
+    drive_cm_new(50,40.42) # drives forward out to the wabbit hole
+    drive_cm_new(50,-19.42) # drives back (drops off wabbit)
+    gyroTurn(-37, 0, 50) # turns toward crane
     drive_cm_new(35,30) #drops crane
     drive_cm_new(50,-51) # drives back so we don't run into big D&B
     gyroTurn(90, 50, 0) # turn right

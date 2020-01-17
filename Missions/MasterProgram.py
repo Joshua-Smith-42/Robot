@@ -82,7 +82,7 @@ def swing_and_safety():
     motorD.stop_action = motorD.STOP_ACTION_HOLD
     motorD.stop() # stall right motor so that it isn't pushed by the swing instead of pushing the swing
 
-    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 7.62000003141596253589) #moves foward from base into swing
+    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 7.620314159) #moves foward from base into swing
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.45) #backs away from swing
 
     motorD.stop_action = motorD.STOP_ACTION_COAST
@@ -101,7 +101,7 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 0.5) # move halfway to safety factor
     motorA.on_for_degrees(SpeedPercent(30), -350) # move left attachment out of the way of safety factor
     #was 1 instruction of 1.074242...
-    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 0.5742424242424242424242424242)#drives up to safety factor|sticking beam under safty factor
+    tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 0.6242424242424242424242424242)#drives up to safety factor|sticking beam under safty factor
     tank_drive.on_for_rotations(SpeedPercent(12), SpeedPercent(-10), 0.2)#turns right to knock the middle two beams
     tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.25) # drives backwards
     tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.5)#turns left to knock down the closest left beam
@@ -117,9 +117,9 @@ def swing_and_safety():
 #------------------------------------------------- Big Design and Build is green ----------------------------------------------------------
 
 def big_design_and_build():
-    drive_cm(50, 65) # goes forward to drop off a big hunk of designand build blocks
-    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(-50), 2) # turns right to angle back towards home as it backs away from the design and build
-    drive_cm(-20, 65) # back into home sweet home
+    drive_cm(50, 60) # goes forward to drop off a big hunk of designand build blocks
+    tank_drive.on_for_seconds(SpeedPercent(-10), SpeedPercent(-50), 1.5) # turns right to angle back towards home as it backs away from the design and build
+    drive_cm(-20, 31) # back into home sweet home
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 

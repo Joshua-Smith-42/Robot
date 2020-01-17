@@ -96,7 +96,7 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #drives into elevator and flips it
     motorA.on_for_degrees(SpeedPercent(15), 200)#motor turns away to not unscore elevator
     drive_cm_new(20, -7) # back up so we get a better angle for safety factor
-    gyroTurn(36, 30, -26) # turn toward safety factor
+    gyroTurn(36, 30, -30) # turn toward safety factor
     motorD.on_for_degrees(SpeedPercent(30), 150) # move right attachment out of the way of safety factor
     tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 0.5) # move halfway to safety factor
     motorA.on_for_degrees(SpeedPercent(30), -350) # move left attachment out of the way of safety factor

@@ -82,8 +82,7 @@ def swing_and_safety():
     motorD.stop_action = motorD.STOP_ACTION_HOLD
     motorD.stop() # stall right motor so that it isn't pushed by the swing instead of pushing the swing
 
-    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #moves foward past base
-    tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 0.9500003141592653589) #drives into swing
+    tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 7.62000003141596253589) #moves foward from base into swing
     tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.45) #backs away from swing
 
     motorD.stop_action = motorD.STOP_ACTION_COAST
@@ -97,7 +96,7 @@ def swing_and_safety():
     tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) #drives into elevator and flips it
     motorA.on_for_degrees(SpeedPercent(15), 200)#motor turns away to not unscore elevator
     drive_cm_new(20, -7) # back up so we get a better angle for safety factor
-    gyroTurn(36, 30, -30) # turn toward safety factor
+    gyroTurn(36, 30, -26) # turn toward safety factor
     motorD.on_for_degrees(SpeedPercent(30), 150) # move right attachment out of the way of safety factor
     tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 0.5) # move halfway to safety factor
     motorA.on_for_degrees(SpeedPercent(30), -350) # move left attachment out of the way of safety factor

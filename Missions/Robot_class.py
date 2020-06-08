@@ -21,6 +21,7 @@ class Robot():
     btn = Button()
     Sound_ = Sound()
     Display_ = Display()
+
     class Conversions():
         wheelDiameter_mm = 56
         wheelCircumference_cm = (wheelDiameter_mm/10) * 3.14159265358979323846284338
@@ -85,18 +86,37 @@ class Robot():
             Robot.Move.drive_cm(50,-50)#backs up to home
 
         def bridge():
-            drive_cm(65,-127.5) # 65% speed -- fast whoosh (was -126)
-            gyroTurn(-90,-15,15)
-            drive_cm(60,30) # square
-            drive_cm(30,-20) # go back
-            gyroTurn(-20,-15,15)
-            drive_cm(30,-119) # drive up bridge
+            Robot.Move.drive_cm(65,-127.5) # 65% speed -- fast whoosh (was -126)
+            Robot.Move.gyroTurn(-90,-15,15)
+            Robot.Move.drive_cm(60,30) # square
+            Robot.Move.drive_cm(30,-20) # go back
+            Robot.Move.gyroTurn(-20,-15,15)
+            Robot.Move.drive_cm(30,-119) # drive up bridge
             tank_drive.off() # stall drivetrain
             while True:
                 if (btn.enter):
                     tank_drive.off(brake=False) # Unstall motors
                     break
                 
+        def swingAndElevator():
+            tank_drive.on_for_rotations(SpeedPercent(50), SpeedPercent(50), 6.67) #ROBOT MOVES FORWARD FROM BASE
+            tank_drive.on_for_rotations(SpeedPercent(20), SpeedPercent(20), .8) # ROBOT MOVES INTO SWING
+            tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 0.4) #ROBOT MOVES AWAY FROM SWING
+            tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 1.5) #ROBOT TURNS TO SQUARE ON WALL
+            motorA.on_for_degrees(SpeedPercent(15), 150) #LEFT ARM TURNS FOR ELEVATOR
+            tank_drive.on_for_rotations(SpeedPercent(-15), SpeedPercent(-15), 0.3) # ROBOT MOVES BACK INTO WALL
+            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.8) 
+            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(0), 1) #
+            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(30), 1.25) 
+            motorA.on_for_degrees(SpeedPercent(15), 50)
+            motorA.on_for_degrees(SpeedPercent(15), 150)
+            tank_drive.on_for_rotations(SpeedPercent(0), SpeedPercent(-30), 0.8)
+            tank_drive.on_for_rotations(SpeedPercent(15), SpeedPercent(15), 1.05)
+            tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.25)
+            tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 0.5) 
+            tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 10) 
+
+
 
         
 

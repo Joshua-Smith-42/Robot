@@ -66,10 +66,10 @@ def gyroStraight(rotations):
     startAng = gyro.angle
     if deg >= 0:
         while (gyro.angle-startAng) <= deg:
-            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(40),int(rotations) )
+            tank_drive.on_for_rotations(SpeedPercent(30), SpeedPercent(40),float(rotations) )
     if deg < 0:
         while (gyro.angle-startAng) <= deg:
-            tank_drive.on_for_rotations(SpeedPercent(40), SpeedPercent(30),int(rotations) )
+            tank_drive.on_for_rotations(SpeedPercent(40), SpeedPercent(30),float(rotations) )
     tank_drive.off()
 
 

@@ -6,7 +6,6 @@ from ev3dev2.button import Button
 from ev3dev2.sound import Sound
 from ev3dev2.display import Display
 import time
-import sys
 
 
 
@@ -21,6 +20,7 @@ class Robot():
     btn = Button()
     Sound_ = Sound()
     Display_ = Display()
+
 
     class Conversions():
         wheelDiameter_mm = 56
@@ -115,6 +115,19 @@ class Robot():
             tank_drive.on_for_rotations(SpeedPercent(-10), SpeedPercent(10), 0.25)
             tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(0), 0.5) 
             tank_drive.on_for_rotations(SpeedPercent(-30), SpeedPercent(-30), 10) 
+
+            
+    def colorChecking():
+        if color.color == color.COLOR_YELLOW: #if yellow is seen
+            Robot.Missions.swingAndElevator() #do swing and safty mission
+        elif color.color == color.COLOR_GREEN: #if green is seen
+            Robot.Missions.d_And_B.big() #do the big design and buil mission
+        elif color.color == color.COLOR_RED: #if red is seen
+            Robot.Missions.d_And_B.small() #do the small design and build mission
+        elif color.color == color.COLOR_BLUE: #if blue is seen
+            Robot.Missions.craneAndWabbit() #do the crane mission
+        elif color.color == color.COLOR_BLACK: # if black is seen
+            Robot.Missions.bridge()#do the bridge mission 
 
 
 
